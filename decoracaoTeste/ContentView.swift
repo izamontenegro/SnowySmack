@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         RealityView { content in
             // Add the initial RealityKit content
-            if let scene = try? await Entity(named: "Decora", in: realityKitContentBundle) {
+            if let scene = try? await Entity(named: "Inicio", in: realityKitContentBundle) {
                 content.add(scene)
             }
         } update: { content in
@@ -31,23 +31,13 @@ struct ContentView: View {
         })
         .toolbar {
             ToolbarItemGroup(placement: .bottomOrnament) {
-                VStack (spacing: 12) {
-                    Button {
-                        enlarge.toggle()
-                    } label: {
-                        Text(enlarge ? "Reduce RealityView Content" : "Enlarge RealityView Content")
-                    }
-                    .animation(.none, value: 0)
-                    .fontWeight(.semibold)
-
                     ToggleImmersiveSpaceButton()
-                }
             }
         }
     }
 }
 
-#Preview(windowStyle: .volumetric) {
+#Preview(windowStyle: .plain) {
     ContentView()
         .environment(AppModel())
 }

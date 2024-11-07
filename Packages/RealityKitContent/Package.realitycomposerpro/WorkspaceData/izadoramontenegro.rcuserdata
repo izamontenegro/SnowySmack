@@ -1,10 +1,14 @@
 {
-  "advancedEditorSelectedIdentifier" : "ProjectBrowser",
+  "advancedEditorSelectedIdentifier" : "BehaviorsPluginID",
   "openSceneRelativePaths" : [
     "Immersive.usda",
-    "Decora.usda"
+    "Decora.usda",
+    "Inicio.usda"
   ],
   "recentIdentifiers" : {
+    "95ECFC7E-CBAD-4E4A-9E58-AEF616524B2D" : [
+
+    ],
     "DCC2BE62-09B3-4A00-9E19-9D2B9F5A45B1" : [
 
     ]
@@ -30,6 +34,74 @@
           0,
           3.6168544,
           3.6168551,
+          1
+        ]
+      }
+    ],
+    "95ECFC7E-CBAD-4E4A-9E58-AEF616524B2D" : [
+      {
+        "date" : 752683881.312254,
+        "title" : "Untitled",
+        "transform" : [
+          0.99999195,
+          -3.771261e-11,
+          -0.0040091784,
+          0,
+          -0.002004897,
+          0.86598104,
+          -0.5000728,
+          0,
+          0.0034718725,
+          0.50007683,
+          0.8659741,
+          0,
+          0.059055746,
+          0.7586951,
+          0.89080316,
+          1
+        ]
+      },
+      {
+        "date" : 752683833.05661,
+        "title" : "Untitled",
+        "transform" : [
+          0.99999195,
+          -3.771261e-11,
+          -0.0040091784,
+          0,
+          -0.002004897,
+          0.86598104,
+          -0.5000728,
+          0,
+          0.0034718725,
+          0.50007683,
+          0.8659741,
+          0,
+          -0.00030608944,
+          0.68135166,
+          0.93570507,
+          1
+        ]
+      },
+      {
+        "date" : 752683826.791888,
+        "title" : "Untitled",
+        "transform" : [
+          0.99999195,
+          4.2386483e-11,
+          -0.004009178,
+          0,
+          -0.0014066718,
+          0.93642694,
+          -0.35086006,
+          0,
+          0.0037543022,
+          0.35086286,
+          0.9364194,
+          0,
+          0.009712999,
+          0.90706444,
+          2.4217644,
           1
         ]
       }
@@ -260,5 +332,5 @@
   "sceneViewportBackgroundColors" : {
 
   },
-  "selectedSceneRelativePath" : "Decora.usda"
+  "selectedSceneRelativePath" : "Inicio.usda"
 }
