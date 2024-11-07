@@ -1,0 +1,49 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.0.16.0.3)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "Christmas_Tree_POLYCRAFT" (
+        active = true
+        prepend references = @Christmas_Tree_POLYCRAFT.usdz@
+    )
+    {
+        quatf xformOp:orient = (0.99999994, 0, 0, 0)
+        float3 xformOp:scale = (0.0017522741, 0.0017522741, 0.0017522741)
+        float3 xformOp:translate = (0.24225916, -5.9604645e-8, -0.18966043)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Dancing_Penguin" (
+        active = true
+        prepend references = @Dancing_Penguin.usdz@
+    )
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.00040873972, 0.00040873972, 0.00040873972)
+        float3 xformOp:translate = (-0.18656725, -5.9604645e-8, -0.27913854)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Snow_Man" (
+        active = true
+        customData = {
+            float3 rotationEulerHint = (0, 3.6651914, 0)
+        }
+        prepend references = @Snow_Man.usdz@
+    )
+    {
+        quatf xformOp:orient = (-0.258819, 0, 0.9659258, 0)
+        float3 xformOp:scale = (0.00057788193, 0.0005778819, 0.00057788193)
+        float3 xformOp:translate = (0.4337382, -5.9604645e-8, 0.051180184)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+}
+
