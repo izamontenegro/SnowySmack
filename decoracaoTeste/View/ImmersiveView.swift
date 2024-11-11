@@ -25,9 +25,6 @@ struct ImmersiveView: View {
                 
                 for child in scene.children {
                     guard child.name == "pinguim" else { continue }
-                    for a in child.availableAnimations {
-                        print(a.name)
-                    }
                     
                     if let animation = child.availableAnimations.last {
                         // Criar a animação de subida (0.0 a 2.0)
