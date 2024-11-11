@@ -10,6 +10,7 @@
 
 def Xform "Root"
 {
+    reorder nameChildren = ["Dancing_Penguin", "Snow_Man", "p", "Christmas_Tree_POLYCRAFT", "ParticleEmitter", "penguin"]
     def "Dancing_Penguin" (
         active = true
         customData = {
@@ -192,6 +193,16 @@ def Xform "Root"
                 }
             }
         }
+    }
+
+    def "pinguim" (
+        active = true
+        prepend references = @Materials/pinguim.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.001, 0.001, 0.001)
+        float3 xformOp:translate = (0, 1.9399359, -1.2901151)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
 

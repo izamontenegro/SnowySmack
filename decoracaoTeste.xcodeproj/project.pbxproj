@@ -34,6 +34,13 @@
 			);
 			target = 36BB290A2CDCEB630069B672 /* decoracaoTeste */;
 		};
+		77EDE19D2CE241240027560D /* Exceptions for "decoracaoTeste" folder in "decoracaoTesteTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/bell.m4a,
+			);
+			target = 36BB29252CDCEB640069B672 /* decoracaoTesteTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -41,6 +48,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				36BB292C2CDCEB640069B672 /* Exceptions for "decoracaoTeste" folder in "decoracaoTeste" target */,
+				77EDE19D2CE241240027560D /* Exceptions for "decoracaoTeste" folder in "decoracaoTesteTests" target */,
 			);
 			path = decoracaoTeste;
 			sourceTree = "<group>";
