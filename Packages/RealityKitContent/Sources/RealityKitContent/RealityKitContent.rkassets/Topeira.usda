@@ -1,0 +1,174 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 2.0 (448.0.16.0.3)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "Buraco_topera" (
+        active = true
+        references = @Materials/Buraco_topera.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.001, 0.001, 0.001)
+        float3 xformOp:translate = (0, -1.1920929e-7, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+
+    def "Topera" (
+        active = true
+        references = @Materials/Topera.usdz@
+    )
+    {
+        float3 xformOp:scale = (0.0005, 0.0005, 0.0005)
+        float3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+        def RealityKitComponent "AudioLibrary"
+        {
+            uniform token info:id = "RealityKit.AudioLibrary"
+
+            def RealityKitDict "resources"
+            {
+                string[] keys = ["dig.wav"]
+                rel values = </Root/dig_wav>
+            }
+        }
+
+        def RealityKitComponent "RCP_BehaviorsContainer"
+        {
+            rel behaviors = </Root/Topera/OnTap>
+            uniform token info:id = "RCP.BehaviorsContainer"
+        }
+
+        def Preliminary_Behavior "OnTap"
+        {
+            rel actions = </Root/Topera/OnTap/Action>
+            uniform bool exclusive
+            rel triggers = </Root/Topera/OnTap/Trigger>
+
+            def Preliminary_Trigger "Trigger"
+            {
+                rel affectedObjects = </Root/Topera>
+                token info:id = "TapGesture"
+            }
+
+            def Preliminary_Action "Action"
+            {
+                rel affectedObjects = </Root>
+                rel animationLibraryKey = </Root/Moviment>
+                rel animationLibraryKeyOverrideKey = </Root/Topera/OnTap/Trigger>
+                token info:id = "PlayTimeline"
+                int loops = 0
+                int performCount = 1
+                token type = "serial"
+            }
+        }
+    }
+
+    def RealityKitTimeline "Moviment"
+    {
+        reorder nameChildren = ["Track2", "Track3", "Track4", "Track"]
+        def RealityKitTrack "Track2"
+        {
+            reorder nameChildren = ["Spin", "Transform_To"]
+            def RealityKitAction "Spin"
+            {
+                string actionKind = "spin"
+                int blendLayer = 400
+                double duration = 0.5
+                uniform token info:id = "528D40DD-9EB1-4C89-BC86-216A4466B0A7"
+                float revolutions = 0.1
+                double startTime = 0
+                rel target = </Root/Topera>
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track3"
+        {
+            def RealityKitAction "Play_Audio"
+            {
+                string actionKind = "audio"
+                string audioResourceName = "dig.wav"
+                bool controlPlayback = 1
+                double duration = 1
+                uniform token info:id = "B9E3DCA8-798C-4C92-9B55-F99E6CE60C98"
+                double startTime = 0.255
+                rel target = </Root/Topera>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track4"
+        {
+            reorder nameChildren = ["descer", "Transform_To2"]
+            def RealityKitAction "descer"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 1
+                uniform token info:id = "9F2C0F5E-1E12-4744-855C-DB87600D7139"
+                float3 position = (0, -0.13206245, 0)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (0.0005, 0.0005, 0.0005)
+                double startTime = 0.5
+                rel target = </Root/Topera>
+
+                def RealityKitStruct "transformMode"
+                {
+                    rel referenceEntity = </Root>
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+
+        def RealityKitTrack "Track"
+        {
+            def RealityKitAction "subir"
+            {
+                string actionKind = "moveTo"
+                int blendLayer = 300
+                double duration = 0.5
+                uniform token info:id = "57521225-CC3A-4ADF-8E2D-37F0BF72C6CE"
+                float3 position = (0, 0, 0)
+                quatf rotation = (1, 0, 0, 0)
+                float3 scale = (0.0005, 0.0005, 0.0005)
+                double startTime = 2.1857128655129054
+                rel target = </Root/Topera>
+
+                def RealityKitStruct "transformMode"
+                {
+                    rel referenceEntity = </Root>
+                    token type = "parent"
+                }
+
+                def RealityKitStruct "timingFunction"
+                {
+                }
+            }
+        }
+    }
+
+    def RealityKitAudioFile "dig_wav"
+    {
+        uniform asset file = @Materials/dig.wav@
+        uniform bool shouldLoop = 0
+    }
+}
+
