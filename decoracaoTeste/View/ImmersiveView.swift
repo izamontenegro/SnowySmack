@@ -23,6 +23,7 @@ struct ImmersiveView: View {
     @Binding var score: Int
     @State private var buracosAtivos: [Bool] = Array(repeating: false, count: 6)
     @State private var enviromentLoader = EnvironmentLoader()
+    @Binding var tempo: Int
 
     var body: some View {
         ZStack {
@@ -43,21 +44,10 @@ struct ImmersiveView: View {
                         handlePenguinTap(entity: value.entity)
                     }
             )
-            
-            Text("\(score)")
-                .font(.largeTitle)
-                .bold()
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.black.opacity(0.5))
-                .cornerRadius(10)
-//                .frame(depth: 1, alignment: .back)
-//                .padding3D(.back, -1000)
-//                .frame(depth: 10)
-            
         }
         .onAppear {
             startRandomNumberTimer()
+            startTimer()
             openWindow(id: "teste")
         }
     }
@@ -79,7 +69,7 @@ struct ImmersiveView: View {
             buracosAtivos[randomNumber - 1] = true
             if let startTime = startTime, Date().timeIntervalSince(startTime) >= 10 {
                 intervalo += 0.5
-            } else if let startTime = startTime, Date().timeIntervalSince(startTime) >= 20{
+            } else if let startTime = startTime, Date().timeIntervalSince(startTime) >= 20 {
                 intervalo += 0.5
             }
             Task {
@@ -94,6 +84,20 @@ struct ImmersiveView: View {
             if let startTime = startTime, Date().timeIntervalSince(startTime) >= 200 {
                 timer.invalidate()
                 timerStarted = false
+            }
+        }
+    }
+    
+    // Função que atualiza o tempo decorrido a cada segundo
+    private func startTimer() {
+        guard !timerStarted else { return }
+        timerStarted = true
+        startTime = Date()
+        
+        
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            if let startTime = startTime {
+                tempo = Int(Date().timeIntervalSince(startTime)) // Atualiza o tempo
             }
         }
     }
@@ -182,5 +186,3 @@ struct ImmersiveView: View {
         }
     }
 }
-
-
