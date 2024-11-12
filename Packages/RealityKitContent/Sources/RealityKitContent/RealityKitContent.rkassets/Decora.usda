@@ -223,6 +223,59 @@ def "pinguim_6" (
     float3 xformOp:scale = (0.0012285073, 0.0012285074, 0.0012285074)
     float3 xformOp:translate = (0.4157961, 1.0598314, -3)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "RCP_BehaviorsContainer"
+    {
+        rel behaviors = </pinguim_6/OnTap>
+        uniform token info:id = "RCP.BehaviorsContainer"
+    }
+
+    def Preliminary_Behavior "OnTap"
+    {
+        rel actions = </pinguim_6/OnTap/Action>
+        uniform bool exclusive
+        rel triggers = </pinguim_6/OnTap/Trigger>
+
+        def Preliminary_Trigger "Trigger"
+        {
+            rel affectedObjects = </pinguim_6>
+            token info:id = "TapGesture"
+        }
+
+        def Preliminary_Action "Action"
+        {
+            rel affectedObjects = None
+            rel animationLibraryKeyOverrideKey = </pinguim_6/OnTap/Trigger>
+            token info:id = "PlayTimeline"
+            int loops = 0
+            int performCount = 1
+            token type = "serial"
+        }
+    }
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
 }
 
 def "pinguim_4" (
@@ -240,6 +293,30 @@ def "pinguim_4" (
     float3 xformOp:scale = (0.0012285077, 0.0012285075, 0.0012285075)
     float3 xformOp:translate = (-1.0150993, 1.0769656, -2.9681902)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
 }
 
 def "pinguim_5" (
@@ -285,6 +362,30 @@ def "pinguim_5" (
             token type = "serial"
         }
     }
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
 }
 
 def "pinguim_2" (
@@ -302,6 +403,30 @@ def "pinguim_2" (
     float3 xformOp:scale = (0.0012285077, 0.0012285075, 0.0012285074)
     float3 xformOp:translate = (-0.2903629, 1.7711, -3)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
 }
 
 def "pinguim_3" (
@@ -318,6 +443,30 @@ def "pinguim_3" (
     float3 xformOp:scale = (0.0012285077, 0.0012285075, 0.0012285074)
     float3 xformOp:translate = (0.36836553, 1.7419113, -3)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
 }
 
 def "pinguim_1" (
@@ -335,6 +484,30 @@ def "pinguim_1" (
     float3 xformOp:scale = (0.0012285074, 0.0012285075, 0.0012285074)
     float3 xformOp:translate = (-1.0656976, 1.771102, -3.0034811)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
 }
 
 def "pinguim_10"

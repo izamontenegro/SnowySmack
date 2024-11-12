@@ -60,7 +60,7 @@ struct ImmersiveView: View {
         timerStarted = true
         startTime = Date()
         
-        Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { timer in
             randomNumber = Int.random(in: 1...6)
             if randomNumber == lastNumber {
                 randomNumber += randomNumber == 6 ? -1 : 1
@@ -76,7 +76,7 @@ struct ImmersiveView: View {
                 }
             }
             
-            if let startTime = startTime, Date().timeIntervalSince(startTime) >= 60 {
+            if let startTime = startTime, Date().timeIntervalSince(startTime) >= 200 {
                 timer.invalidate()
                 timerStarted = false
             }
@@ -101,9 +101,9 @@ struct ImmersiveView: View {
                         fillMode: [],
                         trimStart: 0.0,
                         trimEnd: 2.0,
-                        trimDuration: 2.0,
+                        trimDuration: 1.0,
                         offset: 0,
-                        delay: 1,
+                        delay: 0,
                         speed: 1.0)
                     
                     up = try? AnimationResource.generate(with: upView)
@@ -117,10 +117,10 @@ struct ImmersiveView: View {
                         fillMode: [],
                         trimStart: 2.0,
                         trimEnd: 4.0,
-                        trimDuration: 2.0,
+                        trimDuration: 0.5,
                         offset: 0,
-                        delay: 1,
-                        speed: 3.0)
+                        delay: 0,
+                        speed: 2.0)
                     
                     down = try? AnimationResource.generate(with: downView)
                     
@@ -132,7 +132,8 @@ struct ImmersiveView: View {
                     let snapAudioAnimation = try! AnimationResource
                         .makeActionAnimation(for: punch, delay: 1.0)
                     
-                    let alignAnimationGroupResource = try! AnimationResource.group(with: [up!, down!, snapAudioAnimation])
+                    let alignAnimationGroupResource = try! AnimationResource.group(with: /*[up!, down!]*/ [up!]
+                        )
                     
                     child.playAnimation(alignAnimationGroupResource)
                 } else {
@@ -142,17 +143,25 @@ struct ImmersiveView: View {
         }
     }
 
-    private func handlePenguinTap(entity: Entity) {
-        // Verifica se a entidade tocada é um pinguim e se é o pinguim atual
+    private func handlePenguinTap(entity: Entity?) {
+        print("TAP no pinguim!")
+        guard let entity = entity else { return }
+        
+//        entity.stopAllAnimations()
+        
         if let numberString = entity.name.split(separator: "_").last,
            let tappedPenguinNumber = Int(numberString),
-           tappedPenguinNumber == randomNumber {
+           tappedPenguinNumber == randomNumber ||  tappedPenguinNumber == lastNumber  {
+            print("Entrou no if")
             
-            // Executa a animação de descida para o pinguim
             if let downAnimation = down {
                 entity.playAnimation(downAnimation)
                 print("Animação de descida reproduzida para o pinguim \(tappedPenguinNumber)")
+            } else {
+                print("Não tem o down!")
             }
+        } else {
+            print("Não entrei no if")
         }
     }
 }
