@@ -3,84 +3,69 @@
     customLayerData = {
         string creator = "Reality Composer Pro Version 2.0 (448.0.16.0.3)"
     }
-    defaultPrim = "Root"
+    defaultPrim = "Dancing_Penguin"
     metersPerUnit = 1
     upAxis = "Y"
 )
 
-def Xform "Root"
+reorder rootPrims = ["Dancing_Penguin", "Snow_Man", "Christmas_Tree_POLYCRAFT", "ParticleEmitter", "pinguim_6", "pinguim_4", "pinguim_5", "pinguim_2", "pinguim_3", "pinguim_1", "pinguim_10"]
+
+def "Dancing_Penguin" (
+    active = true
+    customData = {
+        float3 rotationEulerHint = (0, 0.6044865, 0)
+    }
+    references = @Dancing_Penguin.usdz@
+)
 {
-    def "Dancing_Penguin" (
-        active = true
-        customData = {
-            float3 rotationEulerHint = (0, 0.6044866, 0)
-        }
-        references = @Dancing_Penguin.usdz@
-    )
+    reorder nameChildren = ["Materials", "SkinnedMeshes", "RCP_BehaviorsContainer", "OnAddedToScene", "AnimationLibrary", "dancinha"]
+    quatf xformOp:orient = (0.95467114, 0, 0.2976625, 0)
+    float3 xformOp:scale = (0.0015213494, 0.0015213493, 0.0015213493)
+    float3 xformOp:translate = (-1.0418842, 1.7881393e-7, -1.8948851)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "RCP_BehaviorsContainer"
     {
-        reorder nameChildren = ["Materials", "SkinnedMeshes", "RCP_BehaviorsContainer", "OnAddedToScene", "AnimationLibrary"]
-        quatf xformOp:orient = (0.95467114, 0, 0.29766253, 0)
-        float3 xformOp:scale = (0.0021875205, 0.0021875203, 0.0021875203)
-        float3 xformOp:translate = (-1.1567606, 1.4156103e-7, -1.5330563)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        rel behaviors = </Dancing_Penguin/OnAddedToScene>
+        uniform token info:id = "RCP.BehaviorsContainer"
+    }
 
-        def RealityKitComponent "RCP_BehaviorsContainer"
+    def Preliminary_Behavior "OnAddedToScene"
+    {
+        rel actions = </Dancing_Penguin/OnAddedToScene/Action>
+        uniform bool exclusive
+        rel triggers = </Dancing_Penguin/OnAddedToScene/Trigger>
+
+        def Preliminary_Trigger "Trigger"
         {
-            rel behaviors = </Root/Dancing_Penguin/OnAddedToScene>
-            uniform token info:id = "RCP.BehaviorsContainer"
+            rel affectedObjects = </Dancing_Penguin>
+            token info:id = "SceneTransition"
         }
 
-        def Preliminary_Behavior "OnAddedToScene"
+        def Preliminary_Action "Action"
         {
-            rel actions = </Root/Dancing_Penguin/OnAddedToScene/Action>
-            uniform bool exclusive
-            rel triggers = </Root/Dancing_Penguin/OnAddedToScene/Trigger>
-
-            def Preliminary_Trigger "Trigger"
-            {
-                rel affectedObjects = </Root/Dancing_Penguin>
-                token info:id = "SceneTransition"
-            }
-
-            def Preliminary_Action "Action"
-            {
-                rel affectedObjects = </Root>
-                rel animationLibraryKey = </Root/p>
-                rel animationLibraryKeyOverrideKey = </Root/Dancing_Penguin/OnAddedToScene/Trigger>
-                token info:id = "PlayTimeline"
-                int loops = 0
-                int performCount = 1
-                token type = "serial"
-            }
-        }
-
-        def RealityKitComponent "AnimationLibrary"
-        {
-            token info:id = "RealityKit.AnimationLibrary"
-
-            def RealityKitAnimationFile "default_subtree_animation"
-            {
-                uniform bool looping = 1
-                uniform string name = "default subtree animation"
-            }
+            rel affectedObjects = </Dancing_Penguin>
+            rel animationLibraryKey = </Dancing_Penguin/dancinha>
+            rel animationLibraryKeyOverrideKey = </Dancing_Penguin/OnAddedToScene/Trigger>
+            token info:id = "PlayTimeline"
+            int loops = 0
+            int performCount = 1
+            token type = "serial"
         }
     }
 
-    def "Snow_Man" (
-        active = true
-        customData = {
-            float3 rotationEulerHint = (-0.024289846, -1.95661, 0.020858526)
-        }
-        references = @Snow_Man.usdz@
-    )
+    def RealityKitComponent "AnimationLibrary"
     {
-        quatf xformOp:orient = (0.55846304, 0.0018693553, -0.8295164, -0.0042505395)
-        float3 xformOp:scale = (0.0028414824, 0.0028414824, 0.0028414829)
-        float3 xformOp:translate = (0.2753892, 9.406358e-8, -2.3746717)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        token info:id = "RealityKit.AnimationLibrary"
+
+        def RealityKitAnimationFile "default_subtree_animation"
+        {
+            uniform bool looping = 1
+            uniform string name = "default subtree animation"
+        }
     }
 
-    def RealityKitTimeline "p"
+    def RealityKitTimeline "dancinha"
     {
         def RealityKitTrack "Track"
         {
@@ -90,105 +75,494 @@ def Xform "Root"
                 string animation = "default subtree animation"
                 int blendLayer = 500
                 double duration = 22.75
-                uniform token info:id = "FEE9C09E-D83E-49AA-8FF8-39FCCC21243D"
+                uniform token info:id = "D916D1F7-4F8B-4635-A0F4-E665FA60B952"
+                double loopCount = 0
                 bool separateAnimatedValue = 1
                 double startTime = 0
-                rel target = </Root/Dancing_Penguin>
+                rel target = </Dancing_Penguin>
+
+                def RealityKitStruct "handoffType"
+                {
+                }
             }
         }
     }
 
-    def "Christmas_Tree_POLYCRAFT" (
-        active = true
-        customData = {
-            float3 rotationEulerHint = (0, -0.56392354, 0)
-        }
-        references = @Christmas_Tree_POLYCRAFT.usdz@
-    )
+    over "SkinnedMeshes"
     {
-        quatf xformOp:orient = (0.96051145, 0, -0.27824047, 0)
-        float3 xformOp:scale = (0.0050999923, 0.0050999923, 0.0050999923)
-        float3 xformOp:translate = (1.2083644, 0, -1.9188092)
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (0.6635538, 0.6635538, 0.6635538)
+        float3 xformOp:translate = (-0.00033569336, 1.4551915e-11, 0.00012207031)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
+}
 
-    def Xform "ParticleEmitter"
+def "Snow_Man" (
+    active = true
+    customData = {
+        float3 rotationEulerHint = (-0.024289846, -1.95661, 0.020858765)
+    }
+    references = @Snow_Man.usdz@
+)
+{
+    quatf xformOp:orient = (0.55846304, 0.0018693553, -0.8295164, -0.00425054)
+    float3 xformOp:scale = (0.0025224849, 0.0025224849, 0.0025224856)
+    float3 xformOp:translate = (-0.21295029, 9.406358e-8, -2.3644357)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+
+def "Christmas_Tree_POLYCRAFT" (
+    active = true
+    customData = {
+        float3 rotationEulerHint = (0, -0.56392354, 0)
+    }
+    references = @Christmas_Tree_POLYCRAFT.usdz@
+)
+{
+    quatf xformOp:orient = (0.96051145, 0, -0.27824047, 0)
+    float3 xformOp:scale = (0.003923063, 0.003923063, 0.003923063)
+    float3 xformOp:translate = (0.70195913, 0, -1.9085732)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+
+def Xform "ParticleEmitter"
+{
+    quatf xformOp:orient = (1, 0, 0, 0)
+    float3 xformOp:scale = (1, 1, 1)
+    float3 xformOp:translate = (-0.18965065, 2.103809, -1.9398623)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "VFXEmitter"
     {
-        float3 xformOp:translate = (0.29868886, 2.103809, -1.9500984)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        token info:id = "RealityKit.VFXEmitter"
 
-        def RealityKitComponent "VFXEmitter"
+        def RealityKitStruct "currentState"
         {
-            token info:id = "RealityKit.VFXEmitter"
+            token birthDirection = "Constant"
+            token birthLocation = "Volume"
+            float3 emissionDirection = (0, -1, 0)
+            double emissionDuration = 1
+            double emissionDurationVariation = 0
+            token emitterShape = "Cylinder"
+            double idleDuration = 0
+            double idleDurationVariation = 0
+            bool isLocal = 0
+            bool isSpawningEnabled = 0
+            bool loops = 1
+            float particleSpeed = 0.08
+            float particleSpeedVariation = 0.04
+            float3 shapeSize = (2, 10, 2)
+            bool spawnInheritParentColor = 0
+            token spawnOccasion = "OnUpdate"
+            float spawnSpreadFactor = 0
+            float spawnSpreadFactorVariation = 0
+            float spawnVelocityFactor = 1
+            double warmupDuration = 0
 
-            def RealityKitStruct "currentState"
+            def RealityKitStruct "mainEmitter"
             {
-                token birthDirection = "Constant"
-                token birthLocation = "Volume"
-                float3 emissionDirection = (0, -1, 0)
-                double emissionDuration = 1
-                double emissionDurationVariation = 0
-                token emitterShape = "Cylinder"
-                double idleDuration = 0
-                double idleDurationVariation = 0
-                bool isLocal = 0
-                bool isSpawningEnabled = 0
-                bool loops = 1
-                float particleSpeed = 0.08
-                float particleSpeedVariation = 0.04
-                float3 shapeSize = (2, 10, 2)
-                bool spawnInheritParentColor = 0
-                token spawnOccasion = "OnUpdate"
-                float spawnSpreadFactor = 0
-                float spawnSpreadFactorVariation = 0
-                float spawnVelocityFactor = 1
-                double warmupDuration = 0
+                float3 acceleration = (0, 0, 0)
+                token billboardMode = "Billboard"
+                float birthRate = 1000
+                float birthRateVariation = 10
+                token blendMode = "Alpha"
+                float colorEvolutionPower = 0
+                float dampingFactor = 0
+                float4 endColorA = (1, 1, 1, 1)
+                float4 endColorB = (1, 1, 1, 1)
+                bool isLightingEnabled = 0
+                float noiseAnimationSpeed = 2
+                float noiseScale = 1
+                float noiseStrength = 0.03
+                token opacityOverLife = "GradualFadeInOut"
+                float particleAngle = 3.1415925
+                float particleAngleVariation = 3.1415925
+                float particleAngularVelocity = 0
+                float particleAngularVelocityVariation = 0.5
+                asset particleImage = @ParticleEmitterPresetTextures/snow.png@
+                double particleLifeSpan = 20
+                double particleLifeSpanVariation = 0.2
+                float particleMass = 1
+                float particleMassVariation = 0
+                float particleSize = 0.004
+                float particleSizeVariation = 0.002
+                float3 radialGravityCenter = (1, 1, 0)
+                float radialGravityStrength = 0
+                float sizeMultiplierAtEndOfLifespan = 0.8
+                float sizeMultiplierAtEndOfLifespanPower = 10
+                token sortOrder = "IncreasingDepth"
+                float spreadingAngle = 0
+                float4 startColorA = (1, 1, 1, 1)
+                float4 startColorB = (1, 1, 1, 1)
+                float stretchFactor = 0
+                bool useEndColor = 1
+                bool useEndColorRange = 0
+                bool useStartColorRange = 0
+                float3 vortexDirection = (0, 1, 0)
+                float vortexStrength = 0
+            }
 
-                def RealityKitStruct "mainEmitter"
-                {
-                    float3 acceleration = (0, 0, 0)
-                    token billboardMode = "Billboard"
-                    float birthRate = 1000
-                    float birthRateVariation = 10
-                    token blendMode = "Alpha"
-                    float colorEvolutionPower = 0
-                    float dampingFactor = 0
-                    float4 endColorA = (1, 1, 1, 1)
-                    float4 endColorB = (1, 1, 1, 1)
-                    bool isLightingEnabled = 0
-                    float noiseAnimationSpeed = 2
-                    float noiseScale = 1
-                    float noiseStrength = 0.03
-                    token opacityOverLife = "GradualFadeInOut"
-                    float particleAngle = 3.1415925
-                    float particleAngleVariation = 3.1415925
-                    float particleAngularVelocity = 0
-                    float particleAngularVelocityVariation = 0.5
-                    asset particleImage = @ParticleEmitterPresetTextures/snow.png@
-                    double particleLifeSpan = 20
-                    double particleLifeSpanVariation = 0.2
-                    float particleMass = 1
-                    float particleMassVariation = 0
-                    float particleSize = 0.004
-                    float particleSizeVariation = 0.002
-                    float3 radialGravityCenter = (1, 1, 0)
-                    float radialGravityStrength = 0
-                    float sizeMultiplierAtEndOfLifespan = 0.8
-                    float sizeMultiplierAtEndOfLifespanPower = 10
-                    token sortOrder = "IncreasingDepth"
-                    float spreadingAngle = 0
-                    float4 startColorA = (1, 1, 1, 1)
-                    float4 startColorB = (1, 1, 1, 1)
-                    float stretchFactor = 0
-                    bool useEndColor = 1
-                    bool useEndColorRange = 0
-                    bool useStartColorRange = 0
-                    float3 vortexDirection = (0, 1, 0)
-                    float vortexStrength = 0
-                }
+            def RealityKitStruct "spawnedEmitter"
+            {
+            }
+        }
+    }
+}
 
-                def RealityKitStruct "spawnedEmitter"
+def "pinguim_6" (
+    active = true
+    customData = {
+        float3 rotationEulerHint = (1.6738422, 0.12530118, -0.016292818)
+    }
+    references = @Materials/pinguim.usdz@
+)
+{
+    float2 ui:nodegraph:node:pos = (20, 20)
+    int ui:nodegraph:node:stackingOrder = 1
+    quatf xformOp:orient = (0.6680374, 0.74144465, 0.035894077, -0.051936693)
+    float3 xformOp:scale = (0.0012285073, 0.0012285074, 0.0012285074)
+    float3 xformOp:translate = (0.5491646, 1.0598314, -2.3044448)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "RCP_BehaviorsContainer"
+    {
+        rel behaviors = </pinguim_6/OnTap>
+        uniform token info:id = "RCP.BehaviorsContainer"
+    }
+
+    def Preliminary_Behavior "OnTap"
+    {
+        rel actions = </pinguim_6/OnTap/Action>
+        uniform bool exclusive
+        rel triggers = </pinguim_6/OnTap/Trigger>
+
+        def Preliminary_Trigger "Trigger"
+        {
+            rel affectedObjects = </pinguim_6>
+            token info:id = "TapGesture"
+        }
+
+        def Preliminary_Action "Action"
+        {
+            rel affectedObjects = None
+            rel animationLibraryKeyOverrideKey = </pinguim_6/OnTap/Trigger>
+            token info:id = "PlayTimeline"
+            int loops = 0
+            int performCount = 1
+            token type = "serial"
+        }
+    }
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
+
+    over "Meshes"
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (2.0134869, 2.0134869, 2.0134869)
+        float3 xformOp:translate = (-0.000061035156, 0.00012207031, -0.00024414062)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+}
+
+def "pinguim_4" (
+    active = true
+    customData = {
+        float3 rotationEulerHint = (1.6738427, 0.12530115, -0.016292816)
+    }
+    references = @Materials/pinguim.usdz@
+)
+{
+    reorder nameChildren = ["pinguim", "Materials", "Meshes"]
+    float2 ui:nodegraph:node:pos = (20, 20)
+    int ui:nodegraph:node:stackingOrder = 1
+    quatf xformOp:orient = (0.66803724, 0.7414448, 0.03589406, -0.051936697)
+    float3 xformOp:scale = (0.0012285077, 0.0012285075, 0.0012285075)
+    float3 xformOp:translate = (-0.8817308, 1.0769656, -2.272635)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
+}
+
+def "pinguim_5" (
+    active = true
+    customData = {
+        float3 rotationEulerHint = (1.6738422, 0.12530118, -0.016292818)
+    }
+    references = @Materials/pinguim.usdz@
+)
+{
+    reorder nameChildren = ["Materials", "Meshes", "pinguim", "pinguim_1", "pinguim_2"]
+    quatf xformOp:orient = (0.6680374, 0.74144465, 0.035894077, -0.051936693)
+    float3 xformOp:scale = (0.0012285073, 0.0012285074, 0.0012285074)
+    float3 xformOp:translate = (-0.16918758, 1.0855777, -2.3044446)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "RCP_BehaviorsContainer"
+    {
+        rel behaviors = </pinguim_5/OnTap>
+        uniform token info:id = "RCP.BehaviorsContainer"
+    }
+
+    def Preliminary_Behavior "OnTap"
+    {
+        rel actions = </pinguim_5/OnTap/Action>
+        uniform bool exclusive
+        rel triggers = </pinguim_5/OnTap/Trigger>
+
+        def Preliminary_Trigger "Trigger"
+        {
+            rel affectedObjects = </pinguim_5>
+            token info:id = "TapGesture"
+        }
+
+        def Preliminary_Action "Action"
+        {
+            rel affectedObjects = None
+            rel animationLibraryKey = None
+            rel animationLibraryKeyOverrideKey = </pinguim_5/OnTap/Trigger>
+            token info:id = "PlayTimeline"
+            int loops = 0
+            int performCount = 1
+            token type = "serial"
+        }
+    }
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
+
+    over "Meshes"
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (2.0134869, 2.0134869, 2.0134869)
+        float3 xformOp:translate = (-0.0000076293945, 0, -0.00024414062)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+}
+
+def "pinguim_2" (
+    active = true
+    customData = {
+        float3 rotationEulerHint = (1.6738424, 0.12530114, -0.01629282)
+    }
+    references = @Materials/pinguim.usdz@
+)
+{
+    reorder nameChildren = ["pinguim", "Materials", "Meshes"]
+    float2 ui:nodegraph:node:pos = (20, 20)
+    int ui:nodegraph:node:stackingOrder = 1
+    quatf xformOp:orient = (0.6680373, 0.74144477, 0.035894055, -0.05193669)
+    float3 xformOp:scale = (0.0012285077, 0.0012285075, 0.0012285074)
+    float3 xformOp:translate = (-0.1569944, 1.7711, -2.3044448)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
+}
+
+def "pinguim_3" (
+    active = true
+    customData = {
+        float3 rotationEulerHint = (1.6738424, 0.12530114, -0.01629282)
+    }
+    references = @Materials/pinguim.usdz@
+)
+{
+    float2 ui:nodegraph:node:pos = (40, 40)
+    int ui:nodegraph:node:stackingOrder = 2
+    quatf xformOp:orient = (0.6680373, 0.74144477, 0.035894055, -0.05193669)
+    float3 xformOp:scale = (0.0012285077, 0.0012285075, 0.0012285074)
+    float3 xformOp:translate = (0.501734, 1.7419113, -2.3044448)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
+}
+
+def "pinguim_1" (
+    active = true
+    customData = {
+        float3 rotationEulerHint = (1.6738421, 0.12530108, -0.016292855)
+    }
+    references = @Materials/pinguim.usdz@
+)
+{
+    reorder nameChildren = ["pinguim", "Materials", "Meshes"]
+    float2 ui:nodegraph:node:pos = (40, 40)
+    int ui:nodegraph:node:stackingOrder = 2
+    quatf xformOp:orient = (0.6680375, 0.74144465, 0.035894036, -0.051936675)
+    float3 xformOp:scale = (0.0012285074, 0.0012285075, 0.0012285074)
+    float3 xformOp:translate = (-0.93232906, 1.771102, -2.307926)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "InputTarget"
+    {
+        uniform token info:id = "RealityKit.InputTarget"
+    }
+
+    def RealityKitComponent "Collider"
+    {
+        uint group = 1
+        uniform token info:id = "RealityKit.Collider"
+        uint mask = 4294967295
+        token type = "Default"
+
+        def RealityKitStruct "Shape"
+        {
+            float3 extent = (442.96716, 424.65207, 442.9669)
+            token shapeType = "Box"
+
+            def RealityKitStruct "pose"
+            {
+                float3 position = (0, -91.51689, 0)
+            }
+        }
+    }
+}
+
+def "pinguim_10"
+{
+    def "Meshes"
+    {
+        def "Sketchfab_model"
+        {
+            def "root"
+            {
+                def "GLTF_SceneRootNode"
                 {
+                    def "buraco_001_7"
+                    {
+                        def "Meshes_6"
+                        {
+                            def "Sketchfab_model_5"
+                            {
+                                def "root_4"
+                                {
+                                    def "GLTF_SceneRootNode_3"
+                                    {
+                                        def "Hole_1_2"
+                                        {
+                                            def "buraco_1"
+                                            {
+                                                def "Object_11"
+                                                {
+                                                    def "Object_1"
+                                                    {
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
