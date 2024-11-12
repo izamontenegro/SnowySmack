@@ -16,12 +16,12 @@ struct ImmersiveView: View {
     @State private var up: AnimationResource?
     @State private var down: AnimationResource?
     @State private var audioLibraryComponent = AudioLibraryComponent()
-    @State private var randomNumber: Int = Int.random(in: 1...9)
+    @State private var randomNumber: Int = Int.random(in: 1...8)
     @State private var timerStarted = false
     @State private var startTime: Date?
-    @State private var lastNumber: Int = Int.random(in: 1...9)
+    @State private var lastNumber: Int = Int.random(in: 1...8)
     @Binding var score: Int
-    @State private var buracosAtivos: [Bool] = Array(repeating: false, count: 6)
+    @State private var buracosAtivos: [Bool] = Array(repeating: false, count: 9)
     @State private var enviromentLoader = EnvironmentLoader()
     @Binding var tempo: Int
 
@@ -59,9 +59,9 @@ struct ImmersiveView: View {
         var intervalo = 2.0
         
         Timer.scheduledTimer(withTimeInterval: TimeInterval(intervalo), repeats: true) { timer in
-            randomNumber = Int.random(in: 1...6)
+            randomNumber = Int.random(in: 1...8)
             if randomNumber == lastNumber {
-                randomNumber = (randomNumber == 6) ? randomNumber - 1 : randomNumber + 1
+                randomNumber = (randomNumber == 8) ? randomNumber - 1 : randomNumber + 1
             }
             lastNumber = randomNumber
             
