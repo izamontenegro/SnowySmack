@@ -11,6 +11,8 @@ import RealityKitContent
 
 struct ImmersiveView: View {
     @Environment(AppModel.self) var appModel
+    @Environment(\.openWindow) private var openWindow
+    
     @State private var up: AnimationResource?
     @State private var down: AnimationResource?
     @State private var audioLibraryComponent = AudioLibraryComponent()
@@ -18,7 +20,8 @@ struct ImmersiveView: View {
     @State private var timerStarted = false
     @State private var startTime: Date?
     @State private var lastNumber: Int = Int.random(in: 1...9)
-    
+    @Binding var score: Int
+    @State private var buracosAtivos: [Bool] = Array(repeating: false, count: 6)
     @State private var enviromentLoader = EnvironmentLoader()
 
     var body: some View {
@@ -28,7 +31,6 @@ struct ImmersiveView: View {
                     let scene = try await enviromentLoader.getScene()
                     content.add(scene)
                     
-                    // Inicia a animação para o pinguim ao carregar o número aleatório
                     playPenguinAnimation(in: scene)
                 } catch {
                     print("Erro ao carregar a cena: \(error)")
@@ -42,16 +44,21 @@ struct ImmersiveView: View {
                     }
             )
             
-            Text("\(randomNumber)")
+            Text("\(score)")
                 .font(.largeTitle)
                 .bold()
                 .foregroundColor(.white)
                 .padding()
                 .background(Color.black.opacity(0.5))
                 .cornerRadius(10)
+//                .frame(depth: 1, alignment: .back)
+//                .padding3D(.back, -1000)
+//                .frame(depth: 10)
+            
         }
         .onAppear {
             startRandomNumberTimer()
+            openWindow(id: "teste")
         }
     }
     
@@ -59,14 +66,22 @@ struct ImmersiveView: View {
         guard !timerStarted else { return }
         timerStarted = true
         startTime = Date()
+        var intervalo = 2.0
         
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: TimeInterval(intervalo), repeats: true) { timer in
             randomNumber = Int.random(in: 1...6)
             if randomNumber == lastNumber {
-                randomNumber += randomNumber == 6 ? -1 : 1
+                randomNumber = (randomNumber == 6) ? randomNumber - 1 : randomNumber + 1
             }
             lastNumber = randomNumber
             
+            // Mantém o buraco sorteado ativo, sem resetar outros
+            buracosAtivos[randomNumber - 1] = true
+            if let startTime = startTime, Date().timeIntervalSince(startTime) >= 10 {
+                intervalo += 0.5
+            } else if let startTime = startTime, Date().timeIntervalSince(startTime) >= 20{
+                intervalo += 0.5
+            }
             Task {
                 do {
                     let scene = try await enviromentLoader.getScene()
@@ -89,7 +104,7 @@ struct ImmersiveView: View {
             
             if let numberString = child.name.split(separator: "_").last,
                let pinguimNumber = Int(numberString),
-               pinguimNumber == randomNumber {
+               buracosAtivos[pinguimNumber - 1] {
                 
                 if let animation = child.availableAnimations.last {
                     let upView = AnimationView(
@@ -101,7 +116,7 @@ struct ImmersiveView: View {
                         fillMode: [],
                         trimStart: 0.0,
                         trimEnd: 2.0,
-                        trimDuration: 1.0,
+                        trimDuration: 2.0,
                         offset: 0,
                         delay: 0,
                         speed: 1.0)
@@ -117,10 +132,10 @@ struct ImmersiveView: View {
                         fillMode: [],
                         trimStart: 2.0,
                         trimEnd: 4.0,
-                        trimDuration: 0.5,
+                        trimDuration: 1.0,
                         offset: 0,
                         delay: 0,
-                        speed: 2.0)
+                        speed: 3.0)
                     
                     down = try? AnimationResource.generate(with: downView)
                     
@@ -132,8 +147,7 @@ struct ImmersiveView: View {
                     let snapAudioAnimation = try! AnimationResource
                         .makeActionAnimation(for: punch, delay: 1.0)
                     
-                    let alignAnimationGroupResource = try! AnimationResource.group(with: /*[up!, down!]*/ [up!]
-                        )
+                    let alignAnimationGroupResource = try! AnimationResource.group(with: [up!])
                     
                     child.playAnimation(alignAnimationGroupResource)
                 } else {
@@ -150,26 +164,23 @@ struct ImmersiveView: View {
         
         guard let entity = entity else { return }
         
-//        entity.stopAllAnimations()
-        
         if let numberString = entity.name.split(separator: "_").last,
-           let tappedPenguinNumber = Int(numberString) {
-            print("Entrou no if")
+           let tappedPenguinNumber = Int(numberString),
+           buracosAtivos[tappedPenguinNumber - 1] {
             
             if let downAnimation = down {
                 entity.playAnimation(downAnimation)
                 print("Animação de descida reproduzida para o pinguim \(tappedPenguinNumber)")
                 entity.playAudio(resource)
+                score+=10
+                buracosAtivos[tappedPenguinNumber - 1] = false
             } else {
                 print("Não tem o down!")
             }
         } else {
-            print("Não entrei no if")
+            print("Pinguim não está ativo, ação ignorada.")
         }
     }
 }
 
-#Preview(immersionStyle: .mixed) {
-    ImmersiveView()
-        .environment(AppModel())
-}
+

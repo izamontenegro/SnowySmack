@@ -11,7 +11,8 @@ import SwiftUI
 struct decoracaoTesteApp: App {
 
     @State private var appModel = AppModel()
-
+    @State private var score: Int = 0
+    
     var body: some Scene {
 //        ImmersiveSpace {
 //            ContentView()
@@ -25,9 +26,19 @@ struct decoracaoTesteApp: App {
                        }
         }
         .windowStyle(.volumetric)
+        
+        WindowGroup(id: "teste") {
+            Text("\(score)")
+        }
+        .defaultWindowPlacement { content, context in
+            if let lastWindow = context.windows.last {
+                return WindowPlacement(.above(lastWindow))
+            }
+            return WindowPlacement(.none)
+        }
 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
-            ImmersiveView()
+            ImmersiveView(score: $score)
                 .environment(appModel)
                 .onAppear {
                     appModel.immersiveSpaceState = .open
