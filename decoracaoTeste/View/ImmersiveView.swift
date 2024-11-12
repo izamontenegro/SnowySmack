@@ -23,78 +23,23 @@ struct ImmersiveView: View {
     var body: some View {
         ZStack {
             RealityView { content in
-                // Carregar a entidade USDZ com animação
                 do {
                     let scene = try await enviromentLoader.getScene()
                     content.add(scene)
                     
-                    let pinguim0 = try await enviromentLoader.getChild(named: "pinguim_0")
-                    
-                    print(pinguim0.availableAnimations)
-                    
-                    for child in scene.children {
-                        guard child.name.hasPrefix("pinguim_") else { continue }
-                        
-                      
-                        if let numberString = child.name.split(separator: "_").last,
-                           let pinguimNumber = Int(numberString),
-                           pinguimNumber == randomNumber {
-                            
-                            if let animation = child.availableAnimations.last {
-                                // Criar a animação de subida (0.0 a 2.0)
-                                let upView = AnimationView(
-                                    source: animation.definition,
-                                    name: "up",
-                                    bindTarget: nil,
-                                    blendLayer: 0,
-                                    repeatMode: .autoReverse,
-                                    fillMode: [],
-                                    trimStart: 0.0,
-                                    trimEnd: 2.0,
-                                    trimDuration: 2.0,
-                                    offset: 0,
-                                    delay: 2,
-                                    speed: 1.0)
-                                
-                                up = try? AnimationResource.generate(with: upView)
-                                
-                                // Criar a animação de descida (2.0 a 4.0)
-                                let downView = AnimationView(
-                                    source: animation.definition,
-                                    name: "down",
-                                    bindTarget: nil,
-                                    blendLayer: 0,
-                                    repeatMode: .autoReverse,
-                                    fillMode: [],
-                                    trimStart: 2.0,
-                                    trimEnd: 4.0,
-                                    trimDuration: 2.0,
-                                    offset: 0,
-                                    delay: 2,
-                                    speed: 3.0)
-                                
-                                down = try? AnimationResource.generate(with: downView)
-                                
-                                let resource = try! AudioFileResource.load(named: "bell.m4a", configuration: .init(shouldLoop: false))
-                                audioLibraryComponent.resources["Punch"] = resource
-                                child.components.set(audioLibraryComponent)
-                                
-                                let punch = PlayAudioAction(audioResourceName: "Punch", useControlledPlayback: false)
-                                let snapAudioAnimation = try! AnimationResource
-                                    .makeActionAnimation(for: punch, delay: 2.0)
-                                
-                                let alignAnimationGroupResource = try! AnimationResource.group(with: [down!, snapAudioAnimation])
-                                
-                                child.playAnimation(alignAnimationGroupResource)
-                            } else {
-                                print("Erro ao carregar a entidade ou animação")
-                            }
-                        }
-                    }
+                    // Inicia a animação para o pinguim ao carregar o número aleatório
+                    playPenguinAnimation(in: scene)
                 } catch {
-                    
+                    print("Erro ao carregar a cena: \(error)")
                 }
             }
+            .gesture(
+                TapGesture()
+                    .targetedToAnyEntity()
+                    .onEnded { value in
+                        value.entity.applyTapForBehaviors()
+                    }
+            )
             
             Text("\(randomNumber)")
                 .font(.largeTitle)
@@ -116,10 +61,78 @@ struct ImmersiveView: View {
         
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             randomNumber = Int.random(in: 1...6)
+            // Reproduz a animação após atualizar o número aleatório
+            Task {
+                do {
+                    let scene = try await enviromentLoader.getScene()
+                    await playPenguinAnimation(in: scene)
+                } catch {
+                    print("Erro ao carregar a cena para animação: \(error)")
+                }
+            }
             
-            if let startTime = startTime, Date().timeIntervalSince(startTime) >= 40 {
+            if let startTime = startTime, Date().timeIntervalSince(startTime) >= 400 {
                 timer.invalidate()
                 timerStarted = false
+            }
+        }
+    }
+    
+    private func playPenguinAnimation(in scene: Entity) {
+        for child in scene.children {
+            guard child.name.hasPrefix("pinguim_") else { continue }
+            
+            if let numberString = child.name.split(separator: "_").last,
+               let pinguimNumber = Int(numberString),
+               pinguimNumber == randomNumber {
+                
+                if let animation = child.availableAnimations.last {
+                    let upView = AnimationView(
+                        source: animation.definition,
+                        name: "up",
+                        bindTarget: nil,
+                        blendLayer: 0,
+                        repeatMode: .autoReverse,
+                        fillMode: [],
+                        trimStart: 0.0,
+                        trimEnd: 2.0,
+                        trimDuration: 2.0,
+                        offset: 0,
+                        delay: 2,
+                        speed: 1.0)
+                    
+                    up = try? AnimationResource.generate(with: upView)
+                    
+                    let downView = AnimationView(
+                        source: animation.definition,
+                        name: "down",
+                        bindTarget: nil,
+                        blendLayer: 0,
+                        repeatMode: .autoReverse,
+                        fillMode: [],
+                        trimStart: 2.0,
+                        trimEnd: 4.0,
+                        trimDuration: 2.0,
+                        offset: 0,
+                        delay: 2,
+                        speed: 3.0)
+                    
+                    down = try? AnimationResource.generate(with: downView)
+                    
+                    let resource = try! AudioFileResource.load(named: "bell.m4a", configuration: .init(shouldLoop: false))
+                    audioLibraryComponent.resources["Punch"] = resource
+                    child.components.set(audioLibraryComponent)
+                    
+                    let punch = PlayAudioAction(audioResourceName: "Punch", useControlledPlayback: false)
+                    let snapAudioAnimation = try! AnimationResource
+                        .makeActionAnimation(for: punch, delay: 2.0)
+                    
+                    let alignAnimationGroupResource = try! AnimationResource.group(with: [down!, snapAudioAnimation])
+                    
+                    child.playAnimation(alignAnimationGroupResource)
+                } else {
+                    print("Erro ao carregar a entidade ou animação")
+                }
             }
         }
     }

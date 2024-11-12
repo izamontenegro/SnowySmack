@@ -255,6 +255,11 @@ def "pinguim_0" (
     float3 xformOp:scale = (0.0012285073, 0.0012285074, 0.0012285074)
     float3 xformOp:translate = (-0.30255607, 1.0855777, -2.9999998)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    def RealityKitComponent "RCP_BehaviorsContainer"
+    {
+        uniform token info:id = "RCP.BehaviorsContainer"
+    }
 }
 
 def "pinguim_3" (
