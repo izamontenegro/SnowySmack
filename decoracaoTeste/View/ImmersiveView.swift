@@ -145,18 +145,21 @@ struct ImmersiveView: View {
 
     private func handlePenguinTap(entity: Entity?) {
         print("TAP no pinguim!")
+        
+        let resource = try! AudioFileResource.load(named: "bell.m4a", configuration: .init(shouldLoop: false))
+        
         guard let entity = entity else { return }
         
 //        entity.stopAllAnimations()
         
         if let numberString = entity.name.split(separator: "_").last,
-           let tappedPenguinNumber = Int(numberString),
-           tappedPenguinNumber == randomNumber ||  tappedPenguinNumber == lastNumber  {
+           let tappedPenguinNumber = Int(numberString) {
             print("Entrou no if")
             
             if let downAnimation = down {
                 entity.playAnimation(downAnimation)
                 print("Animação de descida reproduzida para o pinguim \(tappedPenguinNumber)")
+                entity.playAudio(resource)
             } else {
                 print("Não tem o down!")
             }

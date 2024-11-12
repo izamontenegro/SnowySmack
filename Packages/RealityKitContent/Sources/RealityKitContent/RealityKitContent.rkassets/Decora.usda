@@ -21,7 +21,7 @@ def "Dancing_Penguin" (
     reorder nameChildren = ["Materials", "SkinnedMeshes", "RCP_BehaviorsContainer", "OnAddedToScene", "AnimationLibrary", "dancinha"]
     quatf xformOp:orient = (0.95467114, 0, 0.2976625, 0)
     float3 xformOp:scale = (0.0015213494, 0.0015213493, 0.0015213493)
-    float3 xformOp:translate = (-1.1752527, 1.7881393e-7, -2.5904403)
+    float3 xformOp:translate = (-1.0418842, 1.7881393e-7, -1.8948851)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "RCP_BehaviorsContainer"
@@ -92,7 +92,7 @@ def "Dancing_Penguin" (
     {
         quatf xformOp:orient = (1, 0, 0, 0)
         float3 xformOp:scale = (0.6635538, 0.6635538, 0.6635538)
-        float3 xformOp:translate = (-0.00030517575, 0, 0.0001220703)
+        float3 xformOp:translate = (-0.00033569336, 1.4551915e-11, 0.00012207031)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
@@ -107,7 +107,7 @@ def "Snow_Man" (
 {
     quatf xformOp:orient = (0.55846304, 0.0018693553, -0.8295164, -0.00425054)
     float3 xformOp:scale = (0.0025224849, 0.0025224849, 0.0025224856)
-    float3 xformOp:translate = (-0.34631878, 9.406358e-8, -3.059991)
+    float3 xformOp:translate = (-0.21295029, 9.406358e-8, -2.3644357)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 }
 
@@ -121,7 +121,7 @@ def "Christmas_Tree_POLYCRAFT" (
 {
     quatf xformOp:orient = (0.96051145, 0, -0.27824047, 0)
     float3 xformOp:scale = (0.003923063, 0.003923063, 0.003923063)
-    float3 xformOp:translate = (0.56859064, 0, -2.6041284)
+    float3 xformOp:translate = (0.70195913, 0, -1.9085732)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 }
 
@@ -129,7 +129,7 @@ def Xform "ParticleEmitter"
 {
     quatf xformOp:orient = (1, 0, 0, 0)
     float3 xformOp:scale = (1, 1, 1)
-    float3 xformOp:translate = (-0.32301915, 2.103809, -2.6354175)
+    float3 xformOp:translate = (-0.18965065, 2.103809, -1.9398623)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "VFXEmitter"
@@ -221,7 +221,7 @@ def "pinguim_6" (
     int ui:nodegraph:node:stackingOrder = 1
     quatf xformOp:orient = (0.6680374, 0.74144465, 0.035894077, -0.051936693)
     float3 xformOp:scale = (0.0012285073, 0.0012285074, 0.0012285074)
-    float3 xformOp:translate = (0.4157961, 1.0598314, -3)
+    float3 xformOp:translate = (0.5491646, 1.0598314, -2.3044448)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "RCP_BehaviorsContainer"
@@ -276,6 +276,14 @@ def "pinguim_6" (
             }
         }
     }
+
+    over "Meshes"
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (2.0134869, 2.0134869, 2.0134869)
+        float3 xformOp:translate = (-0.000061035156, 0.00012207031, -0.00024414062)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
 }
 
 def "pinguim_4" (
@@ -291,7 +299,7 @@ def "pinguim_4" (
     int ui:nodegraph:node:stackingOrder = 1
     quatf xformOp:orient = (0.66803724, 0.7414448, 0.03589406, -0.051936697)
     float3 xformOp:scale = (0.0012285077, 0.0012285075, 0.0012285075)
-    float3 xformOp:translate = (-1.0150993, 1.0769656, -2.9681902)
+    float3 xformOp:translate = (-0.8817308, 1.0769656, -2.272635)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "InputTarget"
@@ -330,7 +338,7 @@ def "pinguim_5" (
     reorder nameChildren = ["Materials", "Meshes", "pinguim", "pinguim_1", "pinguim_2"]
     quatf xformOp:orient = (0.6680374, 0.74144465, 0.035894077, -0.051936693)
     float3 xformOp:scale = (0.0012285073, 0.0012285074, 0.0012285074)
-    float3 xformOp:translate = (-0.30255607, 1.0855777, -2.9999998)
+    float3 xformOp:translate = (-0.16918758, 1.0855777, -2.3044446)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "RCP_BehaviorsContainer"
@@ -386,6 +394,14 @@ def "pinguim_5" (
             }
         }
     }
+
+    over "Meshes"
+    {
+        quatf xformOp:orient = (1, 0, 0, 0)
+        float3 xformOp:scale = (2.0134869, 2.0134869, 2.0134869)
+        float3 xformOp:translate = (-0.0000076293945, 0, -0.00024414062)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
 }
 
 def "pinguim_2" (
@@ -401,7 +417,7 @@ def "pinguim_2" (
     int ui:nodegraph:node:stackingOrder = 1
     quatf xformOp:orient = (0.6680373, 0.74144477, 0.035894055, -0.05193669)
     float3 xformOp:scale = (0.0012285077, 0.0012285075, 0.0012285074)
-    float3 xformOp:translate = (-0.2903629, 1.7711, -3)
+    float3 xformOp:translate = (-0.1569944, 1.7711, -2.3044448)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "InputTarget"
@@ -441,7 +457,7 @@ def "pinguim_3" (
     int ui:nodegraph:node:stackingOrder = 2
     quatf xformOp:orient = (0.6680373, 0.74144477, 0.035894055, -0.05193669)
     float3 xformOp:scale = (0.0012285077, 0.0012285075, 0.0012285074)
-    float3 xformOp:translate = (0.36836553, 1.7419113, -3)
+    float3 xformOp:translate = (0.501734, 1.7419113, -2.3044448)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "InputTarget"
@@ -482,7 +498,7 @@ def "pinguim_1" (
     int ui:nodegraph:node:stackingOrder = 2
     quatf xformOp:orient = (0.6680375, 0.74144465, 0.035894036, -0.051936675)
     float3 xformOp:scale = (0.0012285074, 0.0012285075, 0.0012285074)
-    float3 xformOp:translate = (-1.0656976, 1.771102, -3.0034811)
+    float3 xformOp:translate = (-0.93232906, 1.771102, -2.307926)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "InputTarget"
