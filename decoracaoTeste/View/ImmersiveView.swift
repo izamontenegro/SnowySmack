@@ -17,13 +17,20 @@ struct ImmersiveView: View {
     @State private var randomNumber: Int = Int.random(in: 1...9)
     @State private var timerStarted = false
     @State private var startTime: Date?
+    
+    @State private var enviromentLoader = EnvironmentLoader()
 
     var body: some View {
         ZStack {
             RealityView { content in
                 // Carregar a entidade USDZ com animação
-                if let scene = try? await Entity(named: "Decora", in: realityKitContentBundle) {
+                do {
+                    let scene = try await enviromentLoader.getScene()
                     content.add(scene)
+                    
+                    let pinguim0 = try await enviromentLoader.getChild(named: "pinguim_0")
+                    
+                    print(pinguim0.availableAnimations)
                     
                     for child in scene.children {
                         guard child.name.hasPrefix("pinguim_") else { continue }
@@ -84,6 +91,8 @@ struct ImmersiveView: View {
                             }
                         }
                     }
+                } catch {
+                    
                 }
             }
             
