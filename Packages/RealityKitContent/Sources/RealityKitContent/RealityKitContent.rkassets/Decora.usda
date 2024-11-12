@@ -8,7 +8,7 @@
     upAxis = "Y"
 )
 
-reorder rootPrims = ["pinguim", "Dancing_Penguin", "Snow_Man", "Christmas_Tree_POLYCRAFT", "ParticleEmitter"]
+reorder rootPrims = ["Dancing_Penguin", "Snow_Man", "Christmas_Tree_POLYCRAFT", "ParticleEmitter", "pinguim_6", "pinguim_4", "pinguim_5", "pinguim_2", "pinguim_3", "pinguim_1", "pinguim_10"]
 
 def "Dancing_Penguin" (
     active = true
@@ -209,7 +209,7 @@ def Xform "ParticleEmitter"
     }
 }
 
-def "pinguim_1" (
+def "pinguim_6" (
     active = true
     customData = {
         float3 rotationEulerHint = (1.6738422, 0.12530118, -0.016292818)
@@ -225,7 +225,7 @@ def "pinguim_1" (
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 }
 
-def "pinguim_2" (
+def "pinguim_4" (
     active = true
     customData = {
         float3 rotationEulerHint = (1.6738427, 0.12530115, -0.016292816)
@@ -242,7 +242,7 @@ def "pinguim_2" (
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 }
 
-def "pinguim_0" (
+def "pinguim_5" (
     active = true
     customData = {
         float3 rotationEulerHint = (1.6738422, 0.12530118, -0.016292818)
@@ -258,11 +258,36 @@ def "pinguim_0" (
 
     def RealityKitComponent "RCP_BehaviorsContainer"
     {
+        rel behaviors = </pinguim_5/OnTap>
         uniform token info:id = "RCP.BehaviorsContainer"
+    }
+
+    def Preliminary_Behavior "OnTap"
+    {
+        rel actions = </pinguim_5/OnTap/Action>
+        uniform bool exclusive
+        rel triggers = </pinguim_5/OnTap/Trigger>
+
+        def Preliminary_Trigger "Trigger"
+        {
+            rel affectedObjects = </pinguim_5>
+            token info:id = "TapGesture"
+        }
+
+        def Preliminary_Action "Action"
+        {
+            rel affectedObjects = None
+            rel animationLibraryKey = None
+            rel animationLibraryKeyOverrideKey = </pinguim_5/OnTap/Trigger>
+            token info:id = "PlayTimeline"
+            int loops = 0
+            int performCount = 1
+            token type = "serial"
+        }
     }
 }
 
-def "pinguim_3" (
+def "pinguim_2" (
     active = true
     customData = {
         float3 rotationEulerHint = (1.6738424, 0.12530114, -0.01629282)
@@ -279,7 +304,7 @@ def "pinguim_3" (
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 }
 
-def "pinguim_4" (
+def "pinguim_3" (
     active = true
     customData = {
         float3 rotationEulerHint = (1.6738424, 0.12530114, -0.01629282)
@@ -295,7 +320,7 @@ def "pinguim_4" (
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 }
 
-def "pinguim_5" (
+def "pinguim_1" (
     active = true
     customData = {
         float3 rotationEulerHint = (1.6738421, 0.12530108, -0.016292855)
@@ -310,5 +335,48 @@ def "pinguim_5" (
     float3 xformOp:scale = (0.0012285074, 0.0012285075, 0.0012285074)
     float3 xformOp:translate = (-1.0656976, 1.771102, -3.0034811)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+
+def "pinguim_10"
+{
+    def "Meshes"
+    {
+        def "Sketchfab_model"
+        {
+            def "root"
+            {
+                def "GLTF_SceneRootNode"
+                {
+                    def "buraco_001_7"
+                    {
+                        def "Meshes_6"
+                        {
+                            def "Sketchfab_model_5"
+                            {
+                                def "root_4"
+                                {
+                                    def "GLTF_SceneRootNode_3"
+                                    {
+                                        def "Hole_1_2"
+                                        {
+                                            def "buraco_1"
+                                            {
+                                                def "Object_11"
+                                                {
+                                                    def "Object_1"
+                                                    {
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 

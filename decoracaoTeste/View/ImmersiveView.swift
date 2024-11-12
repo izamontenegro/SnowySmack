@@ -17,6 +17,7 @@ struct ImmersiveView: View {
     @State private var randomNumber: Int = Int.random(in: 1...9)
     @State private var timerStarted = false
     @State private var startTime: Date?
+    @State private var lastNumber: Int = Int.random(in: 1...9)
     
     @State private var enviromentLoader = EnvironmentLoader()
 
@@ -37,7 +38,7 @@ struct ImmersiveView: View {
                 TapGesture()
                     .targetedToAnyEntity()
                     .onEnded { value in
-                        value.entity.applyTapForBehaviors()
+                        handlePenguinTap(entity: value.entity)
                     }
             )
             
@@ -59,9 +60,13 @@ struct ImmersiveView: View {
         timerStarted = true
         startTime = Date()
         
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { timer in
             randomNumber = Int.random(in: 1...6)
-            // Reproduz a animação após atualizar o número aleatório
+            if randomNumber == lastNumber {
+                randomNumber += randomNumber == 6 ? -1 : 1
+            }
+            lastNumber = randomNumber
+            
             Task {
                 do {
                     let scene = try await enviromentLoader.getScene()
@@ -71,7 +76,7 @@ struct ImmersiveView: View {
                 }
             }
             
-            if let startTime = startTime, Date().timeIntervalSince(startTime) >= 400 {
+            if let startTime = startTime, Date().timeIntervalSince(startTime) >= 60 {
                 timer.invalidate()
                 timerStarted = false
             }
@@ -98,7 +103,7 @@ struct ImmersiveView: View {
                         trimEnd: 2.0,
                         trimDuration: 2.0,
                         offset: 0,
-                        delay: 2,
+                        delay: 1,
                         speed: 1.0)
                     
                     up = try? AnimationResource.generate(with: upView)
@@ -114,7 +119,7 @@ struct ImmersiveView: View {
                         trimEnd: 4.0,
                         trimDuration: 2.0,
                         offset: 0,
-                        delay: 2,
+                        delay: 1,
                         speed: 3.0)
                     
                     down = try? AnimationResource.generate(with: downView)
@@ -125,14 +130,28 @@ struct ImmersiveView: View {
                     
                     let punch = PlayAudioAction(audioResourceName: "Punch", useControlledPlayback: false)
                     let snapAudioAnimation = try! AnimationResource
-                        .makeActionAnimation(for: punch, delay: 2.0)
+                        .makeActionAnimation(for: punch, delay: 1.0)
                     
-                    let alignAnimationGroupResource = try! AnimationResource.group(with: [down!, snapAudioAnimation])
+                    let alignAnimationGroupResource = try! AnimationResource.group(with: [up!, down!, snapAudioAnimation])
                     
                     child.playAnimation(alignAnimationGroupResource)
                 } else {
                     print("Erro ao carregar a entidade ou animação")
                 }
+            }
+        }
+    }
+
+    private func handlePenguinTap(entity: Entity) {
+        // Verifica se a entidade tocada é um pinguim e se é o pinguim atual
+        if let numberString = entity.name.split(separator: "_").last,
+           let tappedPenguinNumber = Int(numberString),
+           tappedPenguinNumber == randomNumber {
+            
+            // Executa a animação de descida para o pinguim
+            if let downAnimation = down {
+                entity.playAnimation(downAnimation)
+                print("Animação de descida reproduzida para o pinguim \(tappedPenguinNumber)")
             }
         }
     }
