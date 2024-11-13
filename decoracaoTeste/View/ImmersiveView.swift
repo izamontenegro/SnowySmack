@@ -87,7 +87,7 @@ struct ImmersiveView: View {
             }
         }
     }
-    
+    // oi
     // Função que atualiza o tempo decorrido a cada segundo
     private func startTimer() {
         guard !timerStarted else { return }

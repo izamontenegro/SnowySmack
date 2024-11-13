@@ -13,15 +13,15 @@ reorder rootPrims = ["Dancing_Penguin", "Snow_Man", "Christmas_Tree_POLYCRAFT", 
 def "Dancing_Penguin" (
     active = true
     customData = {
-        float3 rotationEulerHint = (0, 0.6044865, 0)
+        float3 rotationEulerHint = (0, 0.6044862, 0)
     }
     references = @Dancing_Penguin.usdz@
 )
 {
     reorder nameChildren = ["Materials", "SkinnedMeshes", "RCP_BehaviorsContainer", "OnAddedToScene", "AnimationLibrary", "dancinha"]
-    quatf xformOp:orient = (0.95467114, 0, 0.2976625, 0)
-    float3 xformOp:scale = (0.0015213494, 0.0015213493, 0.0015213493)
-    float3 xformOp:translate = (-1.0418842, 1.7881393e-7, -1.8948851)
+    quatf xformOp:orient = (0.9546712, 0, 0.29766238, 0)
+    float3 xformOp:scale = (0.0034607667, 0.0034607663, 0.003460766)
+    float3 xformOp:translate = (-1.6780303, 0.12105076, -1.720732)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "RCP_BehaviorsContainer"
@@ -88,11 +88,15 @@ def "Dancing_Penguin" (
         }
     }
 
-    over "SkinnedMeshes"
+    over "SkinnedMeshes" (
+        customData = {
+            float3 rotationEulerHint = (0, 4.529088e-8, 0)
+        }
+    )
     {
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (0.6635538, 0.6635538, 0.6635538)
-        float3 xformOp:translate = (-0.00033569336, 1.4551915e-11, 0.00012207031)
+        quatf xformOp:orient = (1, 0, 2.264544e-8, 0)
+        float3 xformOp:scale = (0.6635537, 0.6635537, 0.66355366)
+        float3 xformOp:translate = (-0.00035858154, -0.0000038146973, 0.000061035156)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }
@@ -106,31 +110,43 @@ def "Snow_Man" (
 )
 {
     reorder nameChildren = ["Materials", "Meshes"]
-    quatf xformOp:orient = (0.55846304, 0.0018693553, -0.8295164, -0.00425054)
-    float3 xformOp:scale = (0.0025224849, 0.0025224849, 0.0025224856)
-    float3 xformOp:translate = (-0.21295029, 9.406358e-8, -2.3644357)
+    quatf xformOp:orient = (0.55846304, 0.0018693553, -0.8295165, -0.0042505404)
+    float3 xformOp:scale = (0.0022735589, 0.0022735589, 0.0022735596)
+    float3 xformOp:translate = (-0.1261439, 0.12105068, -2.735903)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+    over "Meshes" (
+        customData = {
+            float3 rotationEulerHint = (2.3128083e-11, 5.6321426e-8, -1.1237493e-9)
+        }
+    )
+    {
+        quatf xformOp:orient = (1, 1.1564062e-11, 2.8160713e-8, -5.6187466e-10)
+        float3 xformOp:scale = (54.26111, 54.26111, 54.26111)
+        float3 xformOp:translate = (0, 0, -0.000030517578)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
 }
 
 def "Christmas_Tree_POLYCRAFT" (
     active = true
     customData = {
-        float3 rotationEulerHint = (0, -0.56392354, 0)
+        float3 rotationEulerHint = (0, -0.9928322, 0)
     }
     references = @Christmas_Tree_POLYCRAFT.usdz@
 )
 {
-    quatf xformOp:orient = (0.96051145, 0, -0.27824047, 0)
-    float3 xformOp:scale = (0.003923063, 0.003923063, 0.003923063)
-    float3 xformOp:translate = (0.70195913, 0, -1.9085732)
+    quatf xformOp:orient = (0.8792951, 0, -0.47627732, 0)
+    float3 xformOp:scale = (0.005658596, 0.005658595, 0.005658596)
+    float3 xformOp:translate = (0.9160922, 0.121050596, -2.3493474)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 }
 
 def Xform "ParticleEmitter"
 {
     quatf xformOp:orient = (1, 0, 0, 0)
-    float3 xformOp:scale = (1, 1, 1)
-    float3 xformOp:translate = (-0.18965065, 2.103809, -1.9398623)
+    float3 xformOp:scale = (2.3610716, 2.3610716, 2.3610716)
+    float3 xformOp:translate = (-0.27620727, 2.01725, -1.9041481)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "VFXEmitter"
@@ -213,16 +229,16 @@ def Xform "ParticleEmitter"
 def "pinguim_6" (
     active = true
     customData = {
-        float3 rotationEulerHint = (1.6738424, -0.354812, -1.589098e-8)
+        float3 rotationEulerHint = (1.6738423, -0.8377581, 8.9077744e-8)
     }
     references = @Materials/pinguim.usdz@
 )
 {
     float2 ui:nodegraph:node:pos = (20, 20)
     int ui:nodegraph:node:stackingOrder = 1
-    quatf xformOp:orient = (0.6592404, 0.7309296, -0.1181958, 0.131049)
-    float3 xformOp:scale = (0.0013769602, 0.0013769604, 0.0013769604)
-    float3 xformOp:translate = (1.0231915, 1.2499503, -1.6215044)
+    quatf xformOp:orient = (0.6118492, 0.6783848, -0.2724128, 0.3020364)
+    float3 xformOp:scale = (0.001241078, 0.0012410783, 0.0012410784)
+    float3 xformOp:translate = (0.97976357, 1.2476523, -1.7368137)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "RCP_BehaviorsContainer"
@@ -294,7 +310,7 @@ def "pinguim_6" (
 def "pinguim_4" (
     active = true
     customData = {
-        float3 rotationEulerHint = (1.6738424, 0.24383137, -1.5355372e-8)
+        float3 rotationEulerHint = (1.6738425, 0.24383134, -1.535537e-8)
     }
     references = @Materials/pinguim.usdz@
 )
@@ -302,9 +318,9 @@ def "pinguim_4" (
     reorder nameChildren = ["pinguim", "Materials", "Meshes"]
     float2 ui:nodegraph:node:pos = (20, 20)
     int ui:nodegraph:node:stackingOrder = 1
-    quatf xformOp:orient = (0.664781, 0.73707277, 0.08145117, -0.090308614)
-    float3 xformOp:scale = (0.0013769605, 0.0013769603, 0.0013769603)
-    float3 xformOp:translate = (-0.5116199, 1.269155, -1.8287965)
+    quatf xformOp:orient = (0.66478103, 0.7370728, 0.08145117, -0.090308614)
+    float3 xformOp:scale = (0.0012410783, 0.0012410779, 0.001241078)
+    float3 xformOp:translate = (-0.4035884, 1.264962, -1.9236497)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "InputTarget"
@@ -335,15 +351,15 @@ def "pinguim_4" (
 def "pinguim_5" (
     active = true
     customData = {
-        float3 rotationEulerHint = (1.6738422, 0, -3.7547263e-9)
+        float3 rotationEulerHint = (1.6738422, -6.661338e-16, -3.7547268e-9)
     }
     references = @Materials/pinguim.usdz@
 )
 {
     reorder nameChildren = ["Materials", "Meshes", "pinguim", "pinguim_1", "pinguim_2"]
-    quatf xformOp:orient = (0.66975236, 0.7425845, -1.3941008e-9, -1.2573684e-9)
-    float3 xformOp:scale = (0.0013769602, 0.0013769604, 0.0013769604)
-    float3 xformOp:translate = (0.2870271, 1.2788079, -1.8644501)
+    quatf xformOp:orient = (0.66975236, 0.7425845, -1.3941012e-9, -1.2573683e-9)
+    float3 xformOp:scale = (0.0012410779, 0.0012410781, 0.0012410781)
+    float3 xformOp:translate = (0.3162459, 1.2736622, -1.9557848)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "RCP_BehaviorsContainer"
@@ -416,7 +432,7 @@ def "pinguim_5" (
 def "pinguim_2" (
     active = true
     customData = {
-        float3 rotationEulerHint = (1.6738424, 8.881784e-16, -7.5094535e-9)
+        float3 rotationEulerHint = (1.6738424, 0, -7.509454e-9)
     }
     references = @Materials/pinguim.usdz@
 )
@@ -424,9 +440,9 @@ def "pinguim_2" (
     reorder nameChildren = ["pinguim", "Materials", "Meshes"]
     float2 ui:nodegraph:node:pos = (20, 20)
     int ui:nodegraph:node:stackingOrder = 1
-    quatf xformOp:orient = (0.66975224, 0.74258465, -2.7882021e-9, -2.514737e-9)
-    float3 xformOp:scale = (0.0013769607, 0.0013769605, 0.0013769604)
-    float3 xformOp:translate = (0.3006937, 2.0471687, -1.8644503)
+    quatf xformOp:orient = (0.66975224, 0.74258465, -2.7882026e-9, -2.5147369e-9)
+    float3 xformOp:scale = (0.0012410784, 0.0012410784, 0.0012410783)
+    float3 xformOp:translate = (0.32856387, 1.966199, -1.955785)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "InputTarget"
@@ -457,16 +473,16 @@ def "pinguim_2" (
 def "pinguim_3" (
     active = true
     customData = {
-        float3 rotationEulerHint = (1.6738424, -0.3371049, 1.5789876e-8)
+        float3 rotationEulerHint = (1.6738424, -0.837758, 4.453887e-8)
     }
     references = @Materials/pinguim.usdz@
 )
 {
     float2 ui:nodegraph:node:pos = (40, 40)
     int ui:nodegraph:node:stackingOrder = 2
-    quatf xformOp:orient = (0.6602609, 0.7320612, -0.11235461, 0.12457265)
-    float3 xformOp:scale = (0.0013769607, 0.0013769605, 0.0013769604)
-    float3 xformOp:translate = (1.0390229, 2.0144527, -1.7247814)
+    quatf xformOp:orient = (0.6118491, 0.67838484, -0.27241278, 0.3020364)
+    float3 xformOp:scale = (0.0012410785, 0.0012410783, 0.0012410783)
+    float3 xformOp:translate = (0.9940327, 1.9367115, -1.8298991)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "InputTarget"
@@ -497,7 +513,7 @@ def "pinguim_3" (
 def "pinguim_1" (
     active = true
     customData = {
-        float3 rotationEulerHint = (1.6738427, 0.29396197, 1.5569016e-8)
+        float3 rotationEulerHint = (1.6738427, 0.2939619, 4.6707058e-8)
     }
     references = @Materials/pinguim.usdz@
 )
@@ -505,9 +521,9 @@ def "pinguim_1" (
     reorder nameChildren = ["pinguim", "Materials", "Meshes"]
     float2 ui:nodegraph:node:pos = (40, 40)
     int ui:nodegraph:node:stackingOrder = 2
-    quatf xformOp:orient = (0.6625308, 0.734578, 0.09808679, -0.10875327)
-    float3 xformOp:scale = (0.0013769602, 0.0013769607, 0.0013769604)
-    float3 xformOp:translate = (-0.48444545, 2.0471709, -1.8741411)
+    quatf xformOp:orient = (0.6625307, 0.73457795, 0.09808677, -0.10875323)
+    float3 xformOp:scale = (0.0012410781, 0.0012410786, 0.0012410785)
+    float3 xformOp:translate = (-0.37909558, 1.966201, -1.9645196)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "InputTarget"
@@ -581,14 +597,14 @@ def "pinguim_10"
 def "pinguim_8" (
     active = true
     customData = {
-        float3 rotationEulerHint = (1.5707961, 0.09281213, -7.482786e-9)
+        float3 rotationEulerHint = (1.5707961, 0.84768015, -1.8014953e-7)
     }
     references = @Materials/pinguim.usdz@
 )
 {
-    quatf xformOp:orient = (0.6645637, 0.6645637, 0.24156797, -0.24156797)
-    float3 xformOp:scale = (0.001298822, 0.0012988221, 0.0012988219)
-    float3 xformOp:translate = (-1.2460184, 2.0181222, -1.7060493)
+    quatf xformOp:orient = (0.6445394, 0.64453936, 0.29080737, -0.29080743)
+    float3 xformOp:scale = (0.0011706505, 0.0011706507, 0.0011706504)
+    float3 xformOp:translate = (-1.0496875, 1.9400189, -1.580543)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "InputTarget"
@@ -619,16 +635,16 @@ def "pinguim_8" (
 def "pinguim_7" (
     active = true
     customData = {
-        float3 rotationEulerHint = (1.5707961, 0.09281213, -7.482786e-9)
+        float3 rotationEulerHint = (1.5707961, 0.84768015, -1.8014953e-7)
     }
     references = @Materials/pinguim.usdz@
 )
 {
     float2 ui:nodegraph:node:pos = (20, 20)
     int ui:nodegraph:node:stackingOrder = 1
-    quatf xformOp:orient = (0.6645637, 0.6645637, 0.24156797, -0.24156797)
-    float3 xformOp:scale = (0.001298822, 0.0012988221, 0.0012988219)
-    float3 xformOp:translate = (-1.265188, 1.2266645, -1.7060492)
+    quatf xformOp:orient = (0.6445394, 0.64453936, 0.29080737, -0.29080743)
+    float3 xformOp:scale = (0.0011706505, 0.0011706507, 0.0011706504)
+    float3 xformOp:translate = (-1.0667704, 1.2266645, -1.5779545)
     uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
 
     def RealityKitComponent "InputTarget"
