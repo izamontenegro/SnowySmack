@@ -30,12 +30,12 @@ struct decoracaoTesteApp: App {
         
         WindowGroup(id: "teste") {
             VStack {
-                HStack {
-                    Image(systemName: "star.circle")
+                HStack(spacing: 16) {
+                    Image(.coin)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 40, height: 40)
-                    Text("score: \(score)")
+                        .frame(width: 90, height: 90)
+                    Text("Score: \(score)")
                         .font(.extraLargeTitle)
                 }
 //                
@@ -49,7 +49,7 @@ struct decoracaoTesteApp: App {
 //                }
             }
         }
-        .defaultSize(width: 300, height: 200)
+        .defaultSize(width: 500, height: 200)
                 .windowResizability(.contentMinSize)
                .defaultWindowPlacement { content, context in
                    if let lastWindow = context.windows.last {

@@ -656,3 +656,17 @@ def "pinguim_7" (
     }
 }
 
+def "speaker" (
+    active = true
+    customData = {
+        float3 rotationEulerHint = (0, 0.6044865, 0)
+    }
+    references = @Materials/speaker.usdz@
+)
+{
+    quatf xformOp:orient = (0.95467114, 0, 0.2976625, 0)
+    float3 xformOp:scale = (0.009, 0.009, 0.009)
+    float3 xformOp:translate = (-1.3562962, 1.7881393e-7, -1.6777065)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+}
+

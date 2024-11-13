@@ -24,7 +24,7 @@ struct ImmersiveView: View {
     @State private var buracosAtivos: [Bool] = Array(repeating: false, count: 9)
     @State private var enviromentLoader = EnvironmentLoader()
     @Binding var tempo: Int
-
+    
     var body: some View {
         ZStack {
             RealityView { content in
@@ -33,6 +33,7 @@ struct ImmersiveView: View {
                     content.add(scene)
                     
                     playPenguinAnimation(in: scene)
+                    _ = await spatialAudio()
                 } catch {
                     print("Erro ao carregar a cena: \(error)")
                 }
@@ -143,24 +144,14 @@ struct ImmersiveView: View {
                     
                     down = try? AnimationResource.generate(with: downView)
                     
-                    let resource = try! AudioFileResource.load(named: "bell.m4a", configuration: .init(shouldLoop: false))
-                    audioLibraryComponent.resources["Punch"] = resource
-                    child.components.set(audioLibraryComponent)
-                    
-                    let punch = PlayAudioAction(audioResourceName: "Punch", useControlledPlayback: false)
-                    let snapAudioAnimation = try! AnimationResource
-                        .makeActionAnimation(for: punch, delay: 1.0)
-                    
-                    let alignAnimationGroupResource = try! AnimationResource.group(with: [up!])
-                    
-                    child.playAnimation(alignAnimationGroupResource)
+                    child.playAnimation(up!)
                 } else {
                     print("Erro ao carregar a entidade ou animação")
                 }
             }
         }
     }
-
+    
     private func handlePenguinTap(entity: Entity?) {
         print("TAP no pinguim!")
         
@@ -185,4 +176,37 @@ struct ImmersiveView: View {
             print("Pinguim não está ativo, ação ignorada.")
         }
     }
+    
+    func spatialAudio() async {
+        do {
+            let speaker = try await enviromentLoader.getChild(named: "speaker")
+    
+            speaker.spatialAudio = SpatialAudioComponent(gain: -5)
+            
+            speaker.spatialAudio?.directivity = .beam(focus: 1)
+            
+            let resource = try AudioFileResource.load(named: "Jingle_Bell_Rock.m4a", configuration: .init(shouldLoop: true))
+            
+            audioLibraryComponent.resources["jingle_bell"] = resource
+            
+            speaker.components.set(audioLibraryComponent)
+            
+            let jingle_bell = PlayAudioAction(audioResourceName: "jingle_bell", useControlledPlayback: false)
+            
+            let snapAudioAnimation = try! AnimationResource
+                .makeActionAnimation(for: jingle_bell, delay: 0.0)
+            
+            let alignAnimationGroupResource = try AnimationResource.group(with: [snapAudioAnimation])
+            
+            speaker.playAnimation(alignAnimationGroupResource)
+        } catch {
+            print("Erro ao carregar a entidade ou animação")
+        }
+    }
+    
 }
+
+//#Preview(immersionStyle: .mixed) {
+//    ImmersiveView(score: .constant(0), tempo: .constant(0))
+//        .environment(AppModel())
+//}

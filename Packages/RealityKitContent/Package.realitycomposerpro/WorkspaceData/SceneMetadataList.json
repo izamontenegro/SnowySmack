@@ -15,7 +15,8 @@
     "objectMetadataList" : [
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root"
+        "Root",
+        "Sphere_Right"
       ],
       {
         "isExpanded" : true,
@@ -32,8 +33,7 @@
       },
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "Sphere_Right"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -117,14 +117,6 @@
       [
         "DCC2BE62-09B3-4A00-9E19-9D2B9F5A45B1",
         "Dancing_Penguin"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "DCC2BE62-09B3-4A00-9E19-9D2B9F5A45B1",
-        "Snow_Man"
       ],
       {
         "isExpanded" : true,
